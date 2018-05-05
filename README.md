@@ -15,7 +15,7 @@
 # Contributing
 - Use `git flow` with default branch naming scheme.
     - Pre-installed on `git for windows`
-    - Explanation at `http://nvie.com/posts/a-successful-git-branching-model/`
+    - Explanation [here](http://nvie.com/posts/a-successful-git-branching-model/)
     - Never commit directly to `master`; avoid direct commits to `develop`.
     - Only publish local `feature` branches when necessary
     - Additionally, use `meta`, `experimental` and personal (ex. `keeper/learn-rendering`) branches in `git flow` style.
