@@ -1,5 +1,9 @@
 package transverse
 
 fun main(args: Array<String>) {
-    println("Hello, World!")
+    if (args.size == 0) {
+        println("Hello, World!")
+    } else if (args.size == 1) {
+        println("Hello, ${args[0]}!")
+    }
 }

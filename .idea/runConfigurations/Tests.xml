@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Tests" type="JUnit" factoryName="JUnit">
     <module name="Transverse" />
-    <extension name="coverage">
+    <extension name="coverage" sample_coverage="false">
       <pattern>
         <option name="PATTERN" value="transverse.*" />
         <option name="ENABLED" value="true" />
