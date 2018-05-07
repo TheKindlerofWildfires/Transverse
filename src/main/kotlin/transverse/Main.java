@@ -96,9 +96,32 @@ public class Main {
         glEnable(GL_TEXTURE_2D);
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
-        Texture tex = new Texture("src/main/resources/lines.png");
+
+        Texture tex = new Texture("src/main/resources/lines.png"); //TODO: TUTORIAL STUFF
+
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
+        float[] vertices = new float[]{
+                -.5f, .5f, 0,
+                0.5f, .5f, 0,
+                .5f, -.5f, 0,
+
+                0.5f, -0.5f, 0,
+                -.5f, -.5f, 0,
+                -.5f, .5f, 0
+        };
+        float[] texture = new float[]{
+                0,0,
+                1,0,
+                1,1,
+
+                1,1,
+                0,1,
+                0,0
+        };
+        Model model = new Model(vertices, texture);
+
+        model.render();
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
             float x = 0f; //TODO: TUTORIAL STUFF
@@ -106,8 +129,10 @@ public class Main {
             if (GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_1) == GL11.GL_TRUE) {
                 x += 1;//TODO: TUTORIAL STUFF
             }
-
+            model.render();
             tex.bind();
+            /*
+
             GL11.glBegin(GL11.GL_QUADS);
             glTexCoord2f(0,0);
             GL11.glVertex2f(-0.5f, 0.5f + x);
@@ -118,7 +143,7 @@ public class Main {
             glTexCoord2f(0,1);
             GL11.glVertex2f(-0.5f, -0.5f + x);
             GL11.glEnd();
-
+            */
             glfwSwapBuffers(window); // swap the color buffers
 
             // Poll for window events. The key callback above will only be
