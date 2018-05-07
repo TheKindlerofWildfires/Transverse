@@ -98,15 +98,21 @@ class HelloWorld {
         while (!GLFW.glfwWindowShouldClose(window)) {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT or GL11.GL_DEPTH_BUFFER_BIT) // clear the framebuffer
 
+            var x: Float = 0f //TODO: TUTORIAL STUFF
+
+            if(GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_1)==GL11.GL_TRUE){
+                x+=1//TODO: TUTORIAL STUFF
+            }
+
             GL11.glBegin(GL11.GL_QUADS)
             GL11.glColor4f(1f,0f,0f,0f)
-            GL11.glVertex2f(-0.5f, 0.5f)
+            GL11.glVertex2f(-0.5f, 0.5f+x)
             GL11.glColor4f(0f,1f,0f,0f)
-            GL11.glVertex2f(0.5f, 0.5f)
+            GL11.glVertex2f(0.5f, 0.5f+x)
             GL11.glColor4f(0f,0f,1f,0f)
-            GL11.glVertex2f(0.5f, -0.5f)
+            GL11.glVertex2f(0.5f, -0.5f+x)
             GL11.glColor4f(0f,0f,0f,0f)
-            GL11.glVertex2f(-0.5f, -0.5f)
+            GL11.glVertex2f(-0.5f, -0.5f+x)
             GL11.glEnd()
 
 
