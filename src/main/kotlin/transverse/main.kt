@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11
 import org.lwjgl.system.MemoryStack
 import org.lwjgl.system.MemoryUtil
-
+//https://www.youtube.com/channel/UCVebYXGDlnFPTIB4CT2dcGA/videos
 class HelloWorld {
 
     // The window handle
@@ -91,12 +91,24 @@ class HelloWorld {
         GL.createCapabilities()
 
         // Set the clear color
-        GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f)
+        GL11.glClearColor(1.0f, 0.3f, 0.9f, 0.0f)
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while (!GLFW.glfwWindowShouldClose(window)) {
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT or GL11.GL_DEPTH_BUFFER_BIT) // clear the framebuffer
+
+            GL11.glBegin(GL11.GL_QUADS)
+            GL11.glColor4f(1f,0f,0f,0f)
+            GL11.glVertex2f(-0.5f, 0.5f)
+            GL11.glColor4f(0f,1f,0f,0f)
+            GL11.glVertex2f(0.5f, 0.5f)
+            GL11.glColor4f(0f,0f,1f,0f)
+            GL11.glVertex2f(0.5f, -0.5f)
+            GL11.glColor4f(0f,0f,0f,0f)
+            GL11.glVertex2f(-0.5f, -0.5f)
+            GL11.glEnd()
+
 
             GLFW.glfwSwapBuffers(window) // swap the color buffers
 
