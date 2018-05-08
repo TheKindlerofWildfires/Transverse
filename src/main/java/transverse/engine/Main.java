@@ -9,6 +9,7 @@ import transverse.render.Texture;
 import transverse.io.Timer;
 import transverse.io.Window;
 import transverse.world.TileRenderer;
+import transverse.world.World;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -68,10 +69,7 @@ public class Main {
 
         Texture tex = new Texture("lines.png"); //TODO: TUTORIAL STUFF
 
-
-
-        Matrix4f scale = new Matrix4f().translate(0,0,0).scale(16);
-        Matrix4f target = new Matrix4f();
+        World world = new World();
 
         camera.setPosition(new Vector3f(0,0,0));
 
@@ -96,9 +94,19 @@ public class Main {
             while(unprocessed>=frame_cap){
                 unprocessed-=frame_cap;
                 can_render = true;
-                target = scale;
                 if(win.getInput().isKeyDown(GLFW_KEY_ESCAPE)){
                     glfwSetWindowShouldClose(win.getWindow(), true);
+                }
+                if(win.getInput().isKeyDown(GLFW_KEY_A)){
+                    camera.getPosition().sub(new Vector3f(5,0,0));
+                }
+                if(win.getInput().isKeyDown(GLFW_KEY_D)){
+                    camera.getPosition().sub(new Vector3f(-5,0,0));
+                }
+                if(win.getInput().isKeyDown(GLFW_KEY_W)){
+                    camera.getPosition().sub(new Vector3f(0,-5,0));
+                }if(win.getInput().isKeyDown(GLFW_KEY_S)){
+                    camera.getPosition().sub(new Vector3f(0,5,0));
                 }
                 win.update();
                 if(frame_time>=1.0){
@@ -117,11 +125,7 @@ public class Main {
                 tex.bind(0);
                 model.render();*/
 
-               for(int i = 0; i<8; i++){
-                   for(int j = 0; j<4; j++) {
-                       tiles.renderTile((byte) 0, i, j, shader, scale, camera);
-                   }
-               }
+               world.render(tiles, shader, camera);
 
                 win.swapBuffers();
                 frames++;
