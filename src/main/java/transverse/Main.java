@@ -137,38 +137,55 @@ public class Main {
 
         camera.setPosition(new Vector3f(-100,0,0));
 
+        double frame_cap = 1.0/60.0;
+
+        double frame_time = 0;
+        int frames = 1;
+
+        double time = Timer.getTime();
+
+        double unprocessed = 0;
+        float x = 0f; //TODO: TUTORIAL STUFF
+
         while (!glfwWindowShouldClose(window)) {
-            target = scale;
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-            float x = 0f; //TODO: TUTORIAL STUFF
+            boolean can_render = false;
+            double time_2 = Timer.getTime();
+            double passed = time_2-time;
+            unprocessed+=passed;
+            frame_time += passed;
 
-            if (GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_1) == GL11.GL_TRUE) {
-                x += 1;//TODO: TUTORIAL STUFF
+            time = time_2;
+
+            while(unprocessed>=frame_cap){
+                unprocessed-=frame_cap;
+                can_render = true;
+                target = scale;
+                if (GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_1) == GL11.GL_TRUE) {
+                    x += 1;//TODO: TUTORIAL STUFF
+                }
+                glfwPollEvents();
+                if(frame_time>=1.0){
+                    frame_time=0;
+                    System.out.println("FPS: " +frames);
+                    frames = 0;
+                }
             }
-            shader.bind();
-            shader.setUniform("sampler", 0);
-            shader.setUniform("projection", camera.getProjection().mul(target));
-            tex.bind(0);
-            model.render();
+            if(can_render) {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-            /*
 
-            GL11.glBegin(GL11.GL_QUADS);
-            glTexCoord2f(0,0);
-            GL11.glVertex2f(-0.5f, 0.5f + x);
-            glTexCoord2f(1,0);
-            GL11.glVertex2f(0.5f, 0.5f + x);
-            glTexCoord2f(1,1);
-            GL11.glVertex2f(0.5f, -0.5f + x);
-            glTexCoord2f(0,1);
-            GL11.glVertex2f(-0.5f, -0.5f + x);
-            GL11.glEnd();
-            */
-            glfwSwapBuffers(window); // swap the color buffers
+                shader.bind();
+                shader.setUniform("sampler", 0);
+                shader.setUniform("projection", camera.getProjection().mul(target));
+                tex.bind(0);
+                model.render();
 
+                glfwSwapBuffers(window); // swap the color buffers
+                frames++;
+            }
             // Poll for window events. The key callback above will only be
             // invoked during this call.
-            glfwPollEvents();
+
         }
     }
 
