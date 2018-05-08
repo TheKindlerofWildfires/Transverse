@@ -21,21 +21,15 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Main {
 
     // The window handle
-    private long window;
-
+    Window win = new Window();
     public void run() {
-        System.out.println("Hello LWJGL " + Version.getVersion() + "!");
+        System.out.println("Begining to Transverse");
 
         init();
         loop();
 
-        // Free the window callbacks and destroy the window
-        glfwFreeCallbacks(window);
-        glfwDestroyWindow(window);
 
-        // Terminate GLFW and free the error callback
-        glfwTerminate();
-        glfwSetErrorCallback(null).free();
+
     }
 
     private void init() {
@@ -48,47 +42,13 @@ public class Main {
             throw new IllegalStateException("Unable to initialize GLFW");
 
         // Configure GLFW
+
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        win.createWindow("Transverse");
 
-        // Create the window
-        window = glfwCreateWindow(640, 480, "Transverse", NULL, NULL);
-        if (window == NULL)
-            throw new RuntimeException("Failed to create the GLFW window");
 
-        // Setup a key callback. It will be called every time a key is pressed, repeated or released.
-        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-            if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
-                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-        });
-
-        // Get the thread stack and push a new frame
-        try (MemoryStack stack = stackPush()) {
-            IntBuffer pWidth = stack.mallocInt(1); // int*
-            IntBuffer pHeight = stack.mallocInt(1); // int*
-
-            // Get the window size passed to glfwCreateWindow
-            glfwGetWindowSize(window, pWidth, pHeight);
-
-            // Get the resolution of the primary monitor
-            GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-
-            // Center the window
-            glfwSetWindowPos(
-                    window,
-                    (vidmode.width() - pWidth.get(0)) / 2,
-                    (vidmode.height() - pHeight.get(0)) / 2
-            );
-        } // the stack frame is popped automatically
-
-        // Make the OpenGL context current
-        glfwMakeContextCurrent(window);
-        // Enable v-sync
-        glfwSwapInterval(1);
-
-        // Make the window visible
-        glfwShowWindow(window);
     }
 
     private void loop() {
@@ -147,7 +107,7 @@ public class Main {
         double unprocessed = 0;
         float x = 0f; //TODO: TUTORIAL STUFF
 
-        while (!glfwWindowShouldClose(window)) {
+        while (!win.shouldClose()) {
             boolean can_render = false;
             double time_2 = Timer.getTime();
             double passed = time_2-time;
@@ -160,9 +120,10 @@ public class Main {
                 unprocessed-=frame_cap;
                 can_render = true;
                 target = scale;
-                if (GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_1) == GL11.GL_TRUE) {
-                    x += 1;//TODO: TUTORIAL STUFF
-                }
+                /*glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+                    if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
+                        glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+                });*/
                 glfwPollEvents();
                 if(frame_time>=1.0){
                     frame_time=0;
@@ -180,7 +141,7 @@ public class Main {
                 tex.bind(0);
                 model.render();
 
-                glfwSwapBuffers(window); // swap the color buffers
+                win.swapBuffers();
                 frames++;
             }
             // Poll for window events. The key callback above will only be
