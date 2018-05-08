@@ -124,7 +124,7 @@ public class Main {
                 if(win.getInput().isKeyDown(GLFW_KEY_ESCAPE)){
                     glfwSetWindowShouldClose(win.getWindow(), true);
                 }
-                glfwPollEvents();
+                win.update();
                 if(frame_time>=1.0){
                     frame_time=0;
                     System.out.println("FPS: " +frames);

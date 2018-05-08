@@ -43,6 +43,10 @@ public class Window {
 
     }
 
+    public void update(){
+        input.update();
+        glfwPollEvents();
+    }
     public boolean shouldClose(){
         return glfwWindowShouldClose(window);//TODO: Freestyled here a little
     }
