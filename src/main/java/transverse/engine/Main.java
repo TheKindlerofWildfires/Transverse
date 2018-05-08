@@ -4,11 +4,11 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
 import transverse.render.Camera;
-import transverse.render.Model;
 import transverse.render.Shader;
 import transverse.render.Texture;
 import transverse.io.Timer;
 import transverse.io.Window;
+import transverse.world.TileRenderer;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -59,40 +59,21 @@ public class Main {
         Camera camera = new Camera(win.getWidth(), win.getHeight());
         glEnable(GL_TEXTURE_2D);
         // Set the clear color
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
+        TileRenderer tiles = new TileRenderer();
+        glClearColor(1.0f, 1.0f, 0.0f, 0.0f);
 
-
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
-        float[] vertices = new float[]{
-                -.5f, .5f, 0,
-                .5f, .5f, 0,
-                .5f, -.5f, 0,
-                -.5f, -.5f, 0,
-        };
-        float[] texture = new float[]{
-                0, 0,
-                1, 0,
-                1, 1,
-                0, 1
-
-        };
-        int[] indices = new int[]{
-                0, 1, 2, 2, 3, 0
-        };
-        Model model = new Model(vertices, texture, indices);
         Shader shader = new Shader("shader");
 
 
-        Texture tex = new Texture("/lines.png"); //TODO: TUTORIAL STUFF
+        Texture tex = new Texture("lines.png"); //TODO: TUTORIAL STUFF
 
 
 
-        Matrix4f scale = new Matrix4f().translate(100,0,0).scale(32);
+        Matrix4f scale = new Matrix4f().translate(0,0,0).scale(16);
         Matrix4f target = new Matrix4f();
 
-        camera.setPosition(new Vector3f(-100,0,0));
+        camera.setPosition(new Vector3f(0,0,0));
 
         double frame_cap = 1.0/60.0;
 
@@ -130,11 +111,17 @@ public class Main {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
 
-                shader.bind();
+               /* shader.bind();
                 shader.setUniform("sampler", 0);
                 shader.setUniform("projection", camera.getProjection().mul(target));
                 tex.bind(0);
-                model.render();
+                model.render();*/
+
+               for(int i = 0; i<8; i++){
+                   for(int j = 0; j<4; j++) {
+                       tiles.renderTile((byte) 0, i, j, shader, scale, camera);
+                   }
+               }
 
                 win.swapBuffers();
                 frames++;

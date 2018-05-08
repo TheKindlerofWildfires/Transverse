@@ -5,6 +5,7 @@ import transverse.util.FileUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -21,7 +22,7 @@ public class Texture {
     public Texture(String filename) {
         BufferedImage bi;
         try {
-            bi = ImageIO.read(FileUtils.getResourceFile(filename));
+            bi = ImageIO.read(new File("src/main/resources/textures/"+filename));//TODO: I feel like this is bad, but it works
             width = bi.getWidth();
             height = bi.getHeight();
 

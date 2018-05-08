@@ -4,12 +4,9 @@ public class Tile {
 
     public static Tile tiles[] = new Tile[16]; //Max tiles in game
 
-    public static final Tile text_tile = new Tile((byte)0, "test");
+    public static final Tile textTile = new Tile((byte)0, "test");
 
     private byte id;
-
-
-
 
     private String texture;
 
