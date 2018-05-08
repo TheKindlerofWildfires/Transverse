@@ -8,21 +8,25 @@ public class Window {
     private long window;
 
     private int width, height;
+
+    private boolean fullscreen;
     public Window(){
         setSize(640, 480);
 
     }
     public void createWindow(String title){
-        window = glfwCreateWindow(width, height, title, 0,0);
+        window = glfwCreateWindow(width, height, title, fullscreen ? glfwGetPrimaryMonitor():0,0);
         if (window == 0){
-            throw new IllegalStateException("Frailed to create window!");
+            throw new IllegalStateException("Failed to create window!");
         }
-        GLFWVidMode vid = glfwGetVideoMode(glfwGetPrimaryMonitor());
-        glfwSetWindowPos(window, (vid.width()-width)/2, (vid.height()-height)/2);
-        glfwShowWindow(window);
+        if(!fullscreen) {
+            GLFWVidMode vid = glfwGetVideoMode(glfwGetPrimaryMonitor());
+            glfwSetWindowPos(window, (vid.width() - width) / 2, (vid.height() - height) / 2);
+            glfwShowWindow(window);
 
+
+        }
         glfwMakeContextCurrent(window);
-
 
     }
     public void setSize(int width, int height){
@@ -39,5 +43,10 @@ public class Window {
     }
     public int getWidth(){return width;}
     public int getHeight(){return height;}
+    public boolean getFullscreen(){return fullscreen;}
+    public void setFullscreen(boolean fullscreen){this.fullscreen = fullscreen;}
+    public long getWindow(){
+        return window;
+    }
 
 }

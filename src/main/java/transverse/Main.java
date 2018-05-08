@@ -46,6 +46,8 @@ public class Main {
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        win.setSize(1920, 1080);
+        win.setFullscreen(true);
         win.createWindow("Transverse");
 
 
@@ -59,7 +61,7 @@ public class Main {
         // bindings available for use.
         GL.createCapabilities();
 
-        Camera camera = new Camera(640, 480);
+        Camera camera = new Camera(win.getWidth(), win.getHeight());
         glEnable(GL_TEXTURE_2D);
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
@@ -107,6 +109,7 @@ public class Main {
         double unprocessed = 0;
         float x = 0f; //TODO: TUTORIAL STUFF
 
+
         while (!win.shouldClose()) {
             boolean can_render = false;
             double time_2 = Timer.getTime();
@@ -120,10 +123,9 @@ public class Main {
                 unprocessed-=frame_cap;
                 can_render = true;
                 target = scale;
-                /*glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-                    if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
-                        glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-                });*/
+                if(glfwGetKey(win.getWindow(), GLFW_KEY_ESCAPE)== GL_TRUE){
+                    glfwSetWindowShouldClose(win.getWindow(), true);
+                }
                 glfwPollEvents();
                 if(frame_time>=1.0){
                     frame_time=0;
