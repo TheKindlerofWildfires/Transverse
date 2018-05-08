@@ -1,67 +1,71 @@
 package transverse;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 import static org.lwjgl.opengl.GL20.*;
+
 public class Shader {
 
     private int program;
     private int vs; //indices
     private int fs; //color effects
 
-    public Shader(String filename){
+    public Shader(String filename) {
         program = glCreateProgram();
         vs = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vs, readFile(filename+".vs"));
+        glShaderSource(vs, readFile(filename + ".vs"));
         glCompileShader(vs);
-        if(glGetShaderi(vs, GL_COMPILE_STATUS)!=1){
+        if (glGetShaderi(vs, GL_COMPILE_STATUS) != 1) {
             System.err.println(glGetShaderInfoLog(vs));
         }
         fs = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fs, readFile(filename+".fs"));
+        glShaderSource(fs, readFile(filename + ".fs"));
         glCompileShader(fs);
-        if(glGetShaderi(fs, GL_COMPILE_STATUS)!=1){
+        if (glGetShaderi(fs, GL_COMPILE_STATUS) != 1) {
             System.err.println(glGetShaderInfoLog(fs));
         }
 
         glAttachShader(program, vs);
         glAttachShader(program, fs);
 
-        glBindAttribLocation(program, 0,"vertices");
+        glBindAttribLocation(program, 0, "vertices");
         glBindAttribLocation(program, 1, "textures");
         glLinkProgram(program);
-        if((glGetProgrami(program, GL_LINK_STATUS)!=1)){
+        if ((glGetProgrami(program, GL_LINK_STATUS) != 1)) {
             System.err.println(glGetProgramInfoLog(program));
         }
         glValidateProgram(program);
-        if((glGetProgrami(program, GL_VALIDATE_STATUS)!=1)){
+        if ((glGetProgrami(program, GL_VALIDATE_STATUS) != 1)) {
             System.err.println(glGetProgramInfoLog(program));
         }
     }
 
-    public void setUniform(String name, int value){
+    public void setUniform(String name, int value) {
         int location = glGetUniformLocation(program, name);
-        if(location!=-1){
+        if (location != -1) {
             glUniform1i(location, value);
         }
     }
-    public void bind(){
+
+    public void bind() {
         glUseProgram(program);
     }
-    private String readFile(String filename){
+
+    private String readFile(String filename) {
         StringBuilder string = new StringBuilder();
         BufferedReader br;
-        try{
-            br = new BufferedReader(new FileReader(new File("src/main/shaders/" +filename)));
+        try {
+            br = new BufferedReader(new FileReader(new File("src/main/shaders/" + filename)));
             String line;
-            while ((line = br.readLine())!=null){
+            while ((line = br.readLine()) != null) {
                 string.append(line);
                 string.append("\n");
             }
             br.close();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return string.toString();

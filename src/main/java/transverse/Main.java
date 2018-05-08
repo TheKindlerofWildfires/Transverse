@@ -1,17 +1,20 @@
 package transverse;
 
-import org.lwjgl.*;
-import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.system.*;
+import org.lwjgl.Version;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.system.MemoryStack;
 
-import java.nio.*;
+import java.nio.IntBuffer;
 
-import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.stackPush;
+import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Main {
 
@@ -108,14 +111,14 @@ public class Main {
                 -.5f, -.5f, 0,
         };
         float[] texture = new float[]{
-                0,0,
-                1,0,
-                1,1,
-                0,1
+                0, 0,
+                1, 0,
+                1, 1,
+                0, 1
 
         };
         int[] indices = new int[]{
-                0,1,2,2,3,0
+                0, 1, 2, 2, 3, 0
         };
         Model model = new Model(vertices, texture, indices);
         Shader shader = new Shader("shader");
