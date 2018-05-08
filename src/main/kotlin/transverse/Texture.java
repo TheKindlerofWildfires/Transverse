@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
+//https://www.youtube.com/channel/UCVebYXGDlnFPTIB4CT2dcGA/videos
 public class Texture {
     private int id;
     private int width;

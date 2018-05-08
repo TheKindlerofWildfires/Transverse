@@ -103,23 +103,21 @@ public class Main {
         // the window or has pressed the ESCAPE key.
         float[] vertices = new float[]{
                 -.5f, .5f, 0,
-                0.5f, .5f, 0,
+                .5f, .5f, 0,
                 .5f, -.5f, 0,
-
-                0.5f, -0.5f, 0,
                 -.5f, -.5f, 0,
-                -.5f, .5f, 0
         };
         float[] texture = new float[]{
                 0,0,
                 1,0,
                 1,1,
+                0,1
 
-                1,1,
-                0,1,
-                0,0
         };
-        Model model = new Model(vertices, texture);
+        int[] indices = new int[]{
+                0,1,2,2,3,0
+        };
+        Model model = new Model(vertices, texture, indices);
 
         model.render();
         while (!glfwWindowShouldClose(window)) {
