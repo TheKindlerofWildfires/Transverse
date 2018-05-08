@@ -1,5 +1,6 @@
 package transverse;
 
+import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -10,6 +11,10 @@ public class Window {
     private int width, height;
 
     private boolean fullscreen;
+
+    public static void setCallbacks(){
+        glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.err));
+    }
     public Window(){
         setSize(640, 480);
 

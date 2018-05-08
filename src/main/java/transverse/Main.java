@@ -35,7 +35,7 @@ public class Main {
     private void init() {
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
-        GLFWErrorCallback.createPrint(System.err).set();
+        win.setCallbacks();//TODO: Slightly freestyled
 
         // Initialize GLFW. Most GLFW functions will not work before doing this.
         if (!glfwInit())
@@ -47,7 +47,7 @@ public class Main {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
         win.setSize(1920, 1080);
-        win.setFullscreen(true);
+        win.setFullscreen(false);
         win.createWindow("Transverse");
 
 
