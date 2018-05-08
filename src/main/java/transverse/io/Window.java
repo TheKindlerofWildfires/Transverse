@@ -1,7 +1,8 @@
-package transverse;
+package transverse.io;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
+import transverse.io.Input;
 
 import static org.lwjgl.glfw.GLFW.*;
 

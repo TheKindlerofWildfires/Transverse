@@ -1,4 +1,4 @@
-package transverse;
+package transverse.render;
 
 import org.lwjgl.BufferUtils;
 

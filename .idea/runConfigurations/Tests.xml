@@ -3,7 +3,7 @@
     <module name="Transverse" />
     <extension name="coverage" sample_coverage="false">
       <pattern>
-        <option name="PATTERN" value="transverse.*" />
+        <option name="PATTERN" value="transverse.io.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

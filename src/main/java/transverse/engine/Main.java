@@ -1,22 +1,17 @@
-package transverse;
+package transverse.engine;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import org.lwjgl.Version;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.system.MemoryStack;
+import transverse.render.Camera;
+import transverse.render.Model;
+import transverse.render.Shader;
+import transverse.render.Texture;
+import transverse.io.Timer;
+import transverse.io.Window;
 
-import java.nio.IntBuffer;
-
-import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryStack.stackPush;
-import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Main {
 

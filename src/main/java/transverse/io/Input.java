@@ -1,4 +1,4 @@
-package transverse;
+package transverse.io;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_LAST;
 import static org.lwjgl.glfw.GLFW.glfwGetKey;

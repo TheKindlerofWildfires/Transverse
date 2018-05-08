@@ -1,4 +1,4 @@
-package transverse;
+package transverse.io;
 
 public class Timer {
     public static double getTime(){
