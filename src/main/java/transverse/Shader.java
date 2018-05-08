@@ -1,7 +1,8 @@
 package transverse;
 
+import transverse.util.FileUtils;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -58,7 +59,7 @@ public class Shader {
         StringBuilder string = new StringBuilder();
         BufferedReader br;
         try {
-            br = new BufferedReader(new FileReader(new File("src/main/shaders/" + filename)));
+            br = new BufferedReader(new FileReader(FileUtils.getResourceFile("/shaders/" + filename)));
             String line;
             while ((line = br.readLine()) != null) {
                 string.append(line);

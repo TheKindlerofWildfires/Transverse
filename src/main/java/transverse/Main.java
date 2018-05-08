@@ -100,7 +100,7 @@ public class Main {
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
-        Texture tex = new Texture("src/main/resources/lines.png"); //TODO: TUTORIAL STUFF
+        Texture tex = new Texture("/lines.png"); //TODO: TUTORIAL STUFF
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.

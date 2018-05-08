@@ -1,10 +1,10 @@
 package transverse;
 
 import org.lwjgl.BufferUtils;
+import transverse.util.FileUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -21,7 +21,7 @@ public class Texture {
     public Texture(String filename) {
         BufferedImage bi;
         try {
-            bi = ImageIO.read(new File(filename));
+            bi = ImageIO.read(FileUtils.getResourceFile(filename));
             width = bi.getWidth();
             height = bi.getHeight();
 
