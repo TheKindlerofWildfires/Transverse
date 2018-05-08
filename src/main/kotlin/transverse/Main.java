@@ -97,7 +97,7 @@ public class Main {
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
-        Texture tex = new Texture("src/main/resources/lines.png"); //TODO: TUTORIAL STUFF
+        //Texture tex = new Texture("src/main/resources/lines.png"); //TODO: TUTORIAL STUFF
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
@@ -118,6 +118,7 @@ public class Main {
                 0,1,2,2,3,0
         };
         Model model = new Model(vertices, texture, indices);
+        Shader shader = new Shader("shader");
 
         model.render();
         while (!glfwWindowShouldClose(window)) {
@@ -127,8 +128,9 @@ public class Main {
             if (GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_1) == GL11.GL_TRUE) {
                 x += 1;//TODO: TUTORIAL STUFF
             }
+            shader.bind();
             model.render();
-            tex.bind();
+            //tex.bind();
             /*
 
             GL11.glBegin(GL11.GL_QUADS);
