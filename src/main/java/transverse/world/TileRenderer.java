@@ -47,7 +47,7 @@ public class TileRenderer {
         if(tileTextures.containsKey(Tile.tiles[id].getTexture())){
             tileTextures.get(Tile.tiles[id].getTexture()).bind(0);
         }
-        Matrix4f tilePos = new Matrix4f().translate(new Vector3f(x, y,0));//TODO: TOOK out a 2 to control spacing
+        Matrix4f tilePos = new Matrix4f().translate(new Vector3f(x*2, y*2,0));//TODO: Spacing is off and I need to hunt this down
         Matrix4f target = new Matrix4f();
 
         camera.getProjection().mul(world, target);

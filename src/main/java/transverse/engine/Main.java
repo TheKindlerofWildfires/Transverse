@@ -8,6 +8,7 @@ import transverse.render.Shader;
 import transverse.render.Texture;
 import transverse.io.Timer;
 import transverse.io.Window;
+import transverse.world.Tile;
 import transverse.world.TileRenderer;
 import transverse.world.World;
 
@@ -50,26 +51,22 @@ public class Main {
     }
 
     private void loop() {
-        // This line is critical for LWJGL's interoperation with GLFW's
-        // OpenGL context, or any context that is managed externally.
-        // LWJGL detects the context that is current in the current thread,
-        // creates the GLCapabilities instance and makes the OpenGL
-        // bindings available for use.
         GL.createCapabilities();
 
         Camera camera = new Camera(win.getWidth(), win.getHeight());
         glEnable(GL_TEXTURE_2D);
-        // Set the clear color
 
         TileRenderer tiles = new TileRenderer();
         glClearColor(1.0f, 1.0f, 0.0f, 0.0f);
 
         Shader shader = new Shader("shader");
 
-
         Texture tex = new Texture("lines.png"); //TODO: TUTORIAL STUFF
 
         World world = new World();
+
+        world.setTile(Tile.test2Tile,0,0);
+        world.setTile(Tile.test2Tile,63,63);
 
         camera.setPosition(new Vector3f(0,0,0));
 
@@ -98,16 +95,17 @@ public class Main {
                     glfwSetWindowShouldClose(win.getWindow(), true);
                 }
                 if(win.getInput().isKeyDown(GLFW_KEY_A)){
-                    camera.getPosition().sub(new Vector3f(5,0,0));
-                }
-                if(win.getInput().isKeyDown(GLFW_KEY_D)){
                     camera.getPosition().sub(new Vector3f(-5,0,0));
                 }
-                if(win.getInput().isKeyDown(GLFW_KEY_W)){
-                    camera.getPosition().sub(new Vector3f(0,-5,0));
-                }if(win.getInput().isKeyDown(GLFW_KEY_S)){
-                    camera.getPosition().sub(new Vector3f(0,5,0));
+                if(win.getInput().isKeyDown(GLFW_KEY_D)){
+                    camera.getPosition().sub(new Vector3f(5,0,0));
                 }
+                if(win.getInput().isKeyDown(GLFW_KEY_W)){
+                    camera.getPosition().sub(new Vector3f(0,5,0));
+                }if(win.getInput().isKeyDown(GLFW_KEY_S)){
+                    camera.getPosition().sub(new Vector3f(0,-5,0));
+                }
+                world.correctCamera(camera, win);
                 win.update();
                 if(frame_time>=1.0){
                     frame_time=0;
