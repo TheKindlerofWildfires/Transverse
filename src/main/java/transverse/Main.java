@@ -1,6 +1,7 @@
 package transverse;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -97,6 +98,8 @@ public class Main {
         // creates the GLCapabilities instance and makes the OpenGL
         // bindings available for use.
         GL.createCapabilities();
+
+        Camera camera = new Camera(640, 480);
         glEnable(GL_TEXTURE_2D);
         // Set the clear color
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
@@ -128,15 +131,14 @@ public class Main {
         Texture tex = new Texture("/lines.png"); //TODO: TUTORIAL STUFF
 
 
-        Matrix4f projection = new Matrix4f().ortho2D(-640/2, 640/2, -480/2, 480/2);
-        Matrix4f scale = new Matrix4f().scale(32);
+
+        Matrix4f scale = new Matrix4f().translate(100,0,0).scale(32);
         Matrix4f target = new Matrix4f();
 
-        projection.mul(scale, target);
-        target = target.translate(1,0,0);
+        camera.setPosition(new Vector3f(-100,0,0));
 
-        model.render();
         while (!glfwWindowShouldClose(window)) {
+            target = scale;
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
             float x = 0f; //TODO: TUTORIAL STUFF
 
@@ -145,7 +147,7 @@ public class Main {
             }
             shader.bind();
             shader.setUniform("sampler", 0);
-            shader.setUniform("projection", target);
+            shader.setUniform("projection", camera.getProjection().mul(target));
             tex.bind(0);
             model.render();
 
