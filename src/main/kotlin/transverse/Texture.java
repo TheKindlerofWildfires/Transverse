@@ -2,6 +2,7 @@ package transverse;
 
 import org.lwjgl.BufferUtils;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -47,8 +48,9 @@ public class Texture {
         }
 
     }
-    public void bind(){
-
+    public void bind(int sampler){
+        if(sampler>= 0 && sampler <=31)
+        glActiveTexture(GL_TEXTURE0+sampler);
         glBindTexture(GL_TEXTURE_2D,id);
     }
 }
