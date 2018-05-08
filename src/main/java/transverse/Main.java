@@ -107,8 +107,6 @@ public class Main {
         double time = Timer.getTime();
 
         double unprocessed = 0;
-        float x = 0f; //TODO: TUTORIAL STUFF
-
 
         while (!win.shouldClose()) {
             boolean can_render = false;
@@ -123,7 +121,7 @@ public class Main {
                 unprocessed-=frame_cap;
                 can_render = true;
                 target = scale;
-                if(glfwGetKey(win.getWindow(), GLFW_KEY_ESCAPE)== GL_TRUE){
+                if(win.getInput().isKeyDown(GLFW_KEY_ESCAPE)){
                     glfwSetWindowShouldClose(win.getWindow(), true);
                 }
                 glfwPollEvents();
