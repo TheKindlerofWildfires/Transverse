@@ -12,6 +12,7 @@ Java.gitignore
 .idea/**/dataSources.local.xml
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
 
 # IntelliJ
 out/
