@@ -25,5 +25,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="lwjgl" level="project" />
+    <orderEntry type="library" name="joml-1.9.9" level="project" />
   </component>
 </module>
