@@ -53,6 +53,11 @@ public class Texture {
         }
 
     }
+    /*@Override
+    protected void finalize() throws Throwable {
+        glDeleteTextures(id);//TODO: Tutorial This crashes
+        super.finalize();
+    }*/
 
     public void bind(int sampler) {
         if (sampler >= 0 && sampler <= 31)

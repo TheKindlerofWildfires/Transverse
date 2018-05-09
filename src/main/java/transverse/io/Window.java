@@ -19,7 +19,7 @@ public class Window {
         glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.err));
     }
     public Window(){
-        setSize(640, 480);
+        setSize(1920, 1080);
 
     }
     public void createWindow(String title){

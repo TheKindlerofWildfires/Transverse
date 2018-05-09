@@ -123,7 +123,7 @@ public class Main {
                 tex.bind(0);
                 model.render();*/
 
-               world.render(tiles, shader, camera);
+               world.render(tiles, shader, camera, win);
 
                 win.swapBuffers();
                 frames++;

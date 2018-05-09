@@ -42,12 +42,12 @@ public class TileRenderer {
 
         }
     }
-    public void renderTile(byte id, int x, int y, Shader shader, Matrix4f world, Camera camera){
+    public void renderTile(Tile tile, int x, int y, Shader shader, Matrix4f world, Camera camera){
         shader.bind();
-        if(tileTextures.containsKey(Tile.tiles[id].getTexture())){
-            tileTextures.get(Tile.tiles[id].getTexture()).bind(0);
+        if(tileTextures.containsKey(tile.getTexture())){
+            tileTextures.get(tile.getTexture()).bind(0);
         }
-        Matrix4f tilePos = new Matrix4f().translate(new Vector3f(x*2, y*2,0));//TODO: Spacing is off and I need to hunt this down
+        Matrix4f tilePos = new Matrix4f().translate(new Vector3f(x, y,0));//TODO: Spacing is off and I need to hunt this down
         Matrix4f target = new Matrix4f();
 
         camera.getProjection().mul(world, target);

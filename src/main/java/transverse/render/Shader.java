@@ -82,4 +82,11 @@ public class Shader {
         }
         return string.toString();
     }
+    protected  void finalize(){
+        glDetachShader(program, vs);
+        glDetachShader(program, fs);
+        glDeleteShader(vs);
+        glDeleteShader(fs);
+        glDeleteProgram(program);
+    }
 }
